@@ -17,6 +17,8 @@ void loop() {
   foam();
   flipCup();
   grounds(fal);
+  showFortune(fal);
+  delay(6000);   // time to read the fortune
 }
 
 void foam(){
@@ -80,4 +82,22 @@ bool inShape(int fal, int16_t x, int16_t y){
 
 bool inCircle(int16_t x, int16_t y, int16_t cx, int16_t cy, int16_t r){
   return (x - cx) * (x - cx) + (y - cy) * (y - cy) < r * r;
+}
+
+void showFortune(int fal){
+  String word = "Luck";
+  if (fal == 0) {
+    word = "Success";
+  }
+
+  tft.setTextFont(4);
+  tft.setTextSize(1);
+  int16_t w = tft.textWidth(word) + 16;
+  int16_t boxX = 58 - w / 2;
+
+  tft.fillRoundRect(boxX, 49, w, 38, 10, coffeeColor);
+  tft.drawRoundRect(boxX, 49, w, 38, 10, foamColor);
+  tft.setTextColor(creamColor);
+  tft.setCursor(boxX + 8, 55);
+  tft.print(word);
 }
