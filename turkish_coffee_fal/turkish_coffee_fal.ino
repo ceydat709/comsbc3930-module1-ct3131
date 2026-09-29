@@ -14,6 +14,7 @@ uint16_t groundsColor = 0x28C1;
 
 void loop() {
   foam();
+  flipCup();
 }
 
 void foam(){
@@ -28,6 +29,14 @@ void foam(){
       tft.fillCircle(x, y, r, foamColor);
       tft.drawCircle(x, y, r, creamColor);    // light edge
     }
+    delay(20);
+  }
+}
+
+void flipCup(){
+  // cream grows out from the center until reaches the corners
+  for (int16_t r = 0; r <= tft.width() / 2 + 20; r += 3) {
+    tft.fillCircle(tft.width() / 2, tft.height() / 2, r, creamColor);
     delay(20);
   }
 }
