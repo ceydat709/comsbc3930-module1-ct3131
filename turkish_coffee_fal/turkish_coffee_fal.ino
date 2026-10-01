@@ -78,7 +78,7 @@ void grounds(int fal){
     if (random(100) < 3) {
       x = -1;   // new splotch
     }
-    while (!inShape(fal, x, y)) {   // pick spots until one is inside shape
+    while (!shape(fal, x, y)) {   // pick spots until one is inside shape
       x = random(tft.width());
       y = random(tft.height());
     }
@@ -96,18 +96,18 @@ void grounds(int fal){
   }
 }
 
-bool inShape(int fal, int16_t x, int16_t y){
+bool shape(int fal, int16_t x, int16_t y){
   if (fal == 0) {
     // moon = big circle with a second circle 
-    return inCircle(x, y, 172, 67, 55) && !inCircle(x, y, 197, 58, 48);
+    return circle(x, y, 172, 67, 55) && !circle(x, y, 197, 58, 48);
   }
   // star = a tall diamond and a wide diamond crossed
   int16_t dx = abs(x - 172);
   int16_t dy = abs(y - 67);
-  return dx * 60 + dy * 18 < 18 * 60 || dx * 18 + dy * 60 < 18 * 60 || inCircle(x, y, 172, 67, 20);
+  return dx * 60 + dy * 18 < 18 * 60 || dx * 18 + dy * 60 < 18 * 60 || circle(x, y, 172, 67, 20);
 }
 
-bool inCircle(int16_t x, int16_t y, int16_t cx, int16_t cy, int16_t r){
+bool circle(int16_t x, int16_t y, int16_t cx, int16_t cy, int16_t r){
   return (x - cx) * (x - cx) + (y - cy) * (y - cy) < r * r;
 }
 
